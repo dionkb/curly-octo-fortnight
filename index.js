@@ -1,7 +1,6 @@
-// Packages required to run
+// Native NodeJS packages/modules required to run
 const inquirer = require('inquirer');
 const fs = require('fs');
-
 const generateLogo = require('./lib/generateLogo');
 const validateColor = require("validate-color").default;
 
@@ -22,7 +21,7 @@ const questions = [
             }
         }
     },
-    // Obtaining the text color
+    // Obtaining the text color input
     {
         name: "textColor",
         message: "Enter a text color (by color name, hex number, etc.):",
@@ -37,7 +36,7 @@ const questions = [
             }
         }
     },
-    // Obtaining the text color
+    // Obtaining the shape input
     {
         name: "shape",
         message: "Choose what shape your logo will be:",
@@ -57,7 +56,7 @@ const questions = [
             }
         }
     },
-    // Obtaining the logo shape's color
+    // Obtaining the logo shape's color input
     {
         name: "shapeColor",
         message: "Enter a shape color (by color name, hex number, etc.):",
