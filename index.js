@@ -1,11 +1,13 @@
 // Packages required to run
 const inquirer = require('inquirer');
+const generateLogo = require('./lib/generateLogo');
+const fs = require('fs');
 
 // Questions for user to be prompted with
 const questions = [
     // Obtaining the users 1-3 letter logo text
     {
-        name: "name",
+        name: "text",
         message: "Input up to three letters got your logo text",
         type: "input",
         default: "DKB", // Remove this default when done testing
@@ -75,12 +77,19 @@ function init() {
     return inquirer.prompt(questions);
 }
 
+// This function writes a SVG file using the native NodeJS 'fs' package,
+// and the user input info after it is run through the generateLogo.js file
+function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.error(err) : console.log('Logo succesfully created')
+    );
+}
+
 // This starts the init function, then processes the results
 init()
 .then(answers => {
-    // return xxxxxxx(answers);
-    // console.log(answers); // TESTING
+    return generateLogo(answers);
 })
-
-// Testing questions prompt:
-// console.log(questions);
+.then(returnedLogo => {
+    writeToFile("logo.svg", returnedLogo);
+});
