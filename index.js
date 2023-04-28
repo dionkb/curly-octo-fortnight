@@ -1,21 +1,23 @@
 // Packages required to run
 const inquirer = require('inquirer');
-const generateLogo = require('./lib/generateLogo');
 const fs = require('fs');
+
+const generateLogo = require('./lib/generateLogo');
+const validateColor = require("validate-color").default;
 
 // Questions for user to be prompted with
 const questions = [
     // Obtaining the users 1-3 letter logo text
     {
         name: "text",
-        message: "Input up to three letters got your logo text",
+        message: "Input up to three characters for your logo text",
         type: "input",
         default: "DKB", // Remove this default when done testing
-        validate: nameInput => {
-            if (nameInput) {
+        validate: textInput => {
+            if (textInput && textInput.length < 4) {
                 return true;
             } else {
-                console.log('You must enter your logo text');
+                console.log('Invalid text entry');
                 return false;
             }
         }
@@ -23,14 +25,14 @@ const questions = [
     // Obtaining the text color
     {
         name: "textColor",
-        message: "Enter a text color (by color name, or by hexadecimal number):",
+        message: "Enter a text color (by color name, hex number, etc.):",
         type: "input",
         default: "blue",  // Remove this default when done testing
         validate: textColorInput => {
-            if (textColorInput) { // May need to add more validation to accept input
+            if (checkColor(textColorInput)) {
                 return true;
             } else {
-                console.log('You must enter a text color');
+                console.log('Invalid color entry');
                 return false;
             }
         }
@@ -58,19 +60,28 @@ const questions = [
     // Obtaining the logo shape's color
     {
         name: "shapeColor",
-        message: "Enter a shape color (by color name, or by hexadecimal number):",
+        message: "Enter a shape color (by color name, hex number, etc.):",
         type: "input",
         default: "black",  // Remove this default when done testing
         validate: shapeColorInput => {
-            if (shapeColorInput) { // May need to add more validation to accept input
+            if (checkColor(shapeColorInput)) { 
                 return true;
             } else {
-                console.log('You must enter a shape color');
+                console.log('Invalid color entry');
                 return false;
             }
         }
     },
 ];
+
+// This function takes color input from the user prompts, and checks if it 
+// is a valid color. Otherwise, logs error message to user
+function checkColor(color) {
+    if (color && color !== '' && validateColor(color)) {
+        return true;
+    }
+    return false;
+};
 
 // This function initializes the inquirer when run
 function init() {
