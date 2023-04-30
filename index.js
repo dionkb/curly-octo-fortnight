@@ -1,8 +1,8 @@
 // Native NodeJS packages/modules required to run
 const inquirer = require('inquirer');
 const fs = require('fs');
-const validateColor = require("validate-color").default;
-const { Circle, Square, Triangle } = require('./lib/shapes'); 
+const validateColor = require('validate-color').default;
+const logoGenerator = require('./lib/logoGenerator');
 
 // Questions for user to be prompted with
 const questions = [
@@ -83,7 +83,7 @@ function checkColor(color) {
 };
 
 // This function writes a SVG file using the native NodeJS 'fs' package,
-// and the user input info after it is run through the generateLogo.js file
+// and the user input info after it is run through the logoGenerator.js file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
         err ? console.error(err) : console.log('Generated logo.svg')
@@ -94,26 +94,7 @@ function writeToFile(fileName, data) {
 function init() {
     inquirer.prompt(questions)
     .then(answers => {
-        if (answers.shape === 'circle') {
-            console.log(answers);
-            let logoShape = new Circle(answers);
-            return logoShape.render();
-        }
-        else if (answers.shape === 'triangle') {
-            let logoShape = new Triangle(answers);
-            return logoShape.render();
-        }
-        else if (answers.shape === 'square') {
-            let logoShape = new Square(answers);
-            return logoShape.render();
-        }
-        else {
-            console.log("Invalid shape input");
-        }
-        return logoShape.render();    
-    })
-    .then(returnedLogo => {
-        console.log(returnedLogo);
+        let returnedLogo = logoGenerator(answers);
         writeToFile("logo.svg", returnedLogo);
     })
     .catch(err => {
