@@ -2,9 +2,7 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const validateColor = require("validate-color").default;
-const Circle = require('./lib/circle');
-const Triangle = require('./lib/triangle');
-const Square = require('./lib/square');
+const { Circle, Square, Triangle } = require('./lib/shapes'); 
 
 // Questions for user to be prompted with
 const questions = [
@@ -97,6 +95,7 @@ function init() {
     inquirer.prompt(questions)
     .then(answers => {
         if (answers.shape === 'circle') {
+            console.log(answers);
             let logoShape = new Circle(answers);
             return logoShape.render();
         }
