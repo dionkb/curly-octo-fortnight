@@ -88,7 +88,7 @@ function checkColor(color) {
 // and the user input info after it is run through the generateLogo.js file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
-        err ? console.error(err) : console.log('Logo succesfully created')
+        err ? console.error(err) : console.log('Generated logo.svg')
     );
 }
 
@@ -116,6 +116,9 @@ function init() {
     .then(returnedLogo => {
         console.log(returnedLogo);
         writeToFile("logo.svg", returnedLogo);
+    })
+    .catch(err => {
+        console.log(err)
     });
 }
 
