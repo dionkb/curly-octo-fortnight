@@ -11,7 +11,6 @@ const questions = [
         name: "text",
         message: "Input up to three characters for your logo text",
         type: "input",
-        default: "DKB", // Remove this default when done testing
         validate: textInput => {
             if (textInput && textInput.length < 4) {
                 return true;
@@ -26,7 +25,6 @@ const questions = [
         name: "textColor",
         message: "Enter a text color (by color name, hex number, etc.):",
         type: "input",
-        default: "blue",  // Remove this default when done testing
         validate: textColorInput => {
             if (checkColor(textColorInput)) {
                 return true;
@@ -41,7 +39,6 @@ const questions = [
         name: "shape",
         message: "Choose what shape your logo will be:",
         type: "list",
-        default: "circle",  // Remove this default when done testing
         choices: [
             "circle",
             "triangle",
@@ -61,7 +58,6 @@ const questions = [
         name: "shapeColor",
         message: "Enter a shape color (by color name, hex number, etc.):",
         type: "input",
-        default: "black",  // Remove this default when done testing
         validate: shapeColorInput => {
             if (checkColor(shapeColorInput)) { 
                 return true;
