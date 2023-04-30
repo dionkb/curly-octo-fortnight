@@ -6,8 +6,6 @@ const Circle = require('./lib/circle');
 const Triangle = require('./lib/triangle');
 const Square = require('./lib/square');
 
-
-
 // Questions for user to be prompted with
 const questions = [
     // Obtaining the users 1-3 letter logo text
@@ -122,9 +120,4 @@ function init() {
 }
 
 // This starts the init function, then processes the results
-init()
-
-
-
-// This function checks the user input for the 'shape' they want, and sends the info
-// to the proper js file to be manipulated there
+init();
