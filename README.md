@@ -8,9 +8,9 @@
   This command-line application is used to allow a user to generate a simple SVG graphic logo. The user runs the application by typing "node index.js" in the command line, and is then prompted to answer a series of questions. The answers are run through various methods of validation and functions to generate a simple logo based on the user inputs.
 
   Screenshot or GIF of final output:  
-  ![screenshot or gif](./\examples\Screenshot.jpg)  
+  ![Screenshot](https://user-images.githubusercontent.com/64495259/235375334-4f6c992d-da52-4d90-b7c5-ad875488db88.jpg)  
   Example SVG Logo generated using the application:  
-  ![sample](.\examples\PeriSqrChrtTxt.svg)  
+  ![PeriSqrChrtTxt](https://user-images.githubusercontent.com/64495259/235375347-b81a3f9d-8bdf-4fd9-874b-03f437907f26.svg)  
   Link to a video walkthrough:  
   https://drive.google.com/file/d/1e2mDxnuF8dHoZ2zCr5eqzSVypppnprOG/view  
 
