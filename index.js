@@ -1,8 +1,12 @@
 // Native NodeJS packages/modules required to run
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateLogo = require('./lib/generateLogo');
 const validateColor = require("validate-color").default;
+const Circle = require('./lib/circle');
+const Triangle = require('./lib/triangle');
+const Square = require('./lib/square');
+
+
 
 // Questions for user to be prompted with
 const questions = [
@@ -82,11 +86,6 @@ function checkColor(color) {
     return false;
 };
 
-// This function initializes the inquirer when run
-function init() {
-    return inquirer.prompt(questions);
-}
-
 // This function writes a SVG file using the native NodeJS 'fs' package,
 // and the user input info after it is run through the generateLogo.js file
 function writeToFile(fileName, data) {
@@ -95,11 +94,37 @@ function writeToFile(fileName, data) {
     );
 }
 
+// This function initializes the inquirer when run
+function init() {
+    inquirer.prompt(questions)
+    .then(answers => {
+        if (answers.shape === 'circle') {
+            let logoShape = new Circle(answers);
+            return logoShape.render();
+        }
+        else if (answers.shape === 'triangle') {
+            let logoShape = new Triangle(answers);
+            return logoShape.render();
+        }
+        else if (answers.shape === 'square') {
+            let logoShape = new Square(answers);
+            return logoShape.render();
+        }
+        else {
+            console.log("Invalid shape input");
+        }
+        return logoShape.render();    
+    })
+    .then(returnedLogo => {
+        console.log(returnedLogo);
+        writeToFile("logo.svg", returnedLogo);
+    });
+}
+
 // This starts the init function, then processes the results
 init()
-.then(answers => {
-    return generateLogo(answers);
-})
-.then(returnedLogo => {
-    writeToFile("logo.svg", returnedLogo);
-});
+
+
+
+// This function checks the user input for the 'shape' they want, and sends the info
+// to the proper js file to be manipulated there
